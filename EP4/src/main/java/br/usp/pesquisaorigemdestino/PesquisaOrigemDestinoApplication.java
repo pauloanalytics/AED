@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PesquisaOrigemDestinoApplication {
 	
-	private static final String PATH_CSV_EP1 = "C:\\Users\\leoco\\Downloads\\OD_2017.csv";
-	private static final String PATH_TXT_EP2 = "C:\\Users\\leoco\\Downloads\\cenario1.txt";
-	private static final String PATH_CSV_RESULTADO_EP1 = "C:\\Users\\leoco\\Downloads\\Resultado_EP1.csv";
-	private static final String PATH_CSV_RESULTADO_EP2 = "C:\\Users\\leoco\\Downloads\\Resultado_EP2.csv";
+	private static final String PATH_CSV_EP1 = "LOCAL DO ARQUIVO ORIGEMDESTINO";
+	private static final String PATH_TXT_EP2 = "LOCAL DO ARQUIVO cenario1.txt";
+	private static final String PATH_CSV_RESULTADO_EP1 = "LOCAL DO ARQUIVO Resultado_EP1.csv";
+	private static final String PATH_CSV_RESULTADO_EP2 = "LOCAL DO ARQUIVO Resultado_EP2.csv";
 
 
 	public static void main(String[] args) throws IOException {

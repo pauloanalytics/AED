@@ -26,14 +26,29 @@ public class CSVService {
 		return dados;
 	}
 	
+	public List<String[]> lerTxt(String path) throws IOException {
+		List<String[]> dados = new LinkedList<String[]>();
+		BufferedReader reader = new BufferedReader(new FileReader(path));
+		String linha;
+		while(((linha = reader.readLine()) != null)) {
+			dados.add(linha.split(" "));
+		}
+		dados.remove(0);
+		dados.remove(0);
+		reader.close();
+		return dados;
+	}
 	
-	public void escrever(String pathCsv, Map<String, Local> mapa) throws IOException {
+	
+	public void escrever(String pathCsv, List<String[]> adicional, Map<Integer, Integer> map) throws IOException {
 		File file = new File(pathCsv);
-		Map<Integer, Integer> map = obterLocaisPorQuantidadePessoa(mapa);
 		CSVWriter writer = new CSVWriter(
 				new OutputStreamWriter (new FileOutputStream(file)),  ';', '"', '"', "\n");
 		List<String[]> dadosSaida = new LinkedList<String[]>();
-		dadosSaida.add(new String[]{"Quantidade Frequentadores", "Quantidade Locais"});
+		
+		for(String[] info : adicional) {
+			dadosSaida.add(info);
+		}
 		
 		for (Integer key : map.keySet()) {
 			dadosSaida.add(new String[]{String.valueOf(key), String.valueOf(map.get(key))});
@@ -44,24 +59,17 @@ public class CSVService {
 			
 	}
 	
-	private Map<Integer, Integer> obterLocaisPorQuantidadePessoa(Map<String, Local> mapa) {
+	public void escrever(String pathCsv, List<String[]> adicional, List<String[]> lst) throws IOException {
+		File file = new File(pathCsv);
+		CSVWriter writer = new CSVWriter(
+				new OutputStreamWriter (new FileOutputStream(file)),  ';', '"', '"', "\n");
 
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-
-		int freq = 0;
-		int qnt = 0;
 		
-		for (String key : mapa.keySet()) {
-			freq = mapa.get(key).getFrequentadores().size();
-			if(map.containsKey(freq)) {
-				qnt = map.get(freq);
-				map.put(freq, (qnt+1));
-			} else {
-				map.put(freq, 1);
-			}
-		}
-		return map;
+		writer.writeAll(adicional);
+		writer.writeAll(lst);
+
+		writer.close();
+			
 	}
-	
 	
 }
